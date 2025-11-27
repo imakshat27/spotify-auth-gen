@@ -1,9 +1,9 @@
 import { NextResponse, NextRequest } from "next/server";
+import { redirectUri } from "@/app/lib/constants";
 
 export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const code = searchParams.get("code");
-    const redirectUri = "https://spotify-auth-gen.vercel.app/api/spotify/callback";
 
     if (!code) {
         return NextResponse.json({ error: "No code provided" }, { status: 400 });
