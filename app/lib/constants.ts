@@ -1,5 +1,5 @@
 const clientId = process.env.SPOTIFY_CLIENT_ID;
-export const redirectUri = "https://spotify-auth-gen.vercel.app/api/spotify/callback";
+export const redirectUri = "https://spotify-auth-gen.vercel.app/token";
 const encodedRedirectUri = encodeURIComponent(redirectUri);
 const scopes = "user-read-currently-playing";
 
