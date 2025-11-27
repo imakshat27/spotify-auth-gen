@@ -1,9 +1,9 @@
 import { NextResponse, NextRequest } from "next/server";
-import { redirectUri } from "@/app/lib/constants";
 
 export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const code = searchParams.get("code");
+    const redirectUri = "https://spotify-auth-gen.vercel.app/api/spotify/callback";
 
     if (!code) {
         return NextResponse.json({ error: "No code provided" }, { status: 400 });
@@ -25,11 +25,11 @@ export async function GET(req: NextRequest) {
         }),
     });
 
-    if (!tokenResponse.ok) {
-        return NextResponse.json({ error: "Failed to fetch tokens" }, { status: 500 });
-    }
-
     const tokenData = await tokenResponse.json();
+
+    if (!tokenResponse.ok) {
+        return NextResponse.json({ error: "Failed to fetch tokens", tokenData }, { status: 500 });
+    }
 
     return NextResponse.json(tokenData);
 }
