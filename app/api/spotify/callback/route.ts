@@ -1,4 +1,5 @@
 import { NextResponse, NextRequest } from "next/server";
+import { redirectUri } from "@/app/lib/constants";
 
 export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
@@ -10,7 +11,6 @@ export async function GET(req: NextRequest) {
 
     const clientId = process.env.SPOTIFY_CLIENT_ID;
     const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
-    const redirectUri = "https://chirayusahu.com/api/spotify/callback";
 
     const tokenResponse = await fetch("https://accounts.spotify.com/api/token", {
         method: "POST",
